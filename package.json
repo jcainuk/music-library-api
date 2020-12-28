@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha tests/**/*.js --exit --recursive --timeout 60000 --file ./tests/test-setup.js",
+    "pretest": "node scripts/create-database.js test",
+    "posttest": "node scripts/drop-database.js",
+    "prestart": "node scripts/create-database.js",
     "start": "nodemon -r dotenv/config index.js"
   },
   "repository": {
@@ -18,14 +21,18 @@
   "homepage": "https://github.com/jcainuk/music-library-api#readme",
   "description": "",
   "devDependencies": {
+    "chai": "^4.2.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.16.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
-    "nodemon": "^2.0.6"
+    "mocha": "^8.2.1",
+    "nodemon": "^2.0.6",
+    "supertest": "^6.0.1"
   },
   "dependencies": {
     "express": "^4.17.1",
+    "mysql2": "^2.2.5",
     "sequelize": "^6.3.5"
   }
 }
