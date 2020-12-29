@@ -27,8 +27,12 @@ describe('/artists', () => {
         name: 'Tame Impala',
         genre: 'Rock',
       });
-
       await expect(response.status).to.equal(201);
+      expect(response.body.name).to.equal('Tame Impala');
+
+      const insertedArtistRecords = await Artist.findByPk(response.body.id, { raw: true });
+      expect(insertedArtistRecords.name).to.equal('Tame Impala');
+      expect(insertedArtistRecords.genre).to.equal('Rock');
     });
   });
 });
