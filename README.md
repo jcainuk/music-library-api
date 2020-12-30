@@ -38,16 +38,15 @@ This is a project completed as part of the Software Engineering FastTrack course
 ## Technologies
 
 * Node and Node Package Manager
-* Chai
-* Mocha
-* Git & GitHub
-* Express
-* nodemon
-* supertest
-* dotenv
-* mySQL
-* Docker
-* Sequelize
+* Chai, Mocha and Supertest for testing purposes
+* Git & GitHub for version control
+* Express for the server and routing
+* nodemon for configuration purposes (it watches your modifications in the code and updates the server accordingly so that you don't need to reload the server everytime you make new changes)
+* dotenv for configuration purposes (environment variables)
+* mySQL (Structured Query Language)
+* mysql2 and Sequelize for the database and the ORM that abtracts it
+* Docker (provides the ability to package and run an application in a loosely isolated environment called a container)
+* eslint (eslint-config-airbnb-base, eslint-plugin-import) for code styling
 
 
 ## Languages
