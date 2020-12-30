@@ -6,6 +6,8 @@ they can also easily initiate the project and create the exact same database
 
 // get the client. We require the mysql2 node package so node can connect to sql
 const mysql = require('mysql2');
+
+// This is a core node.js module just to deal with file paths
 const path = require('path');
 
 /* Below tells the dotenv library our environment filepath,
