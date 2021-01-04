@@ -19,3 +19,5 @@ route directly in the app.js file, we specify a controller function.
 It is better this way, because concerns are separated in different files:
  one file for the routing, one file (or several files) for the controller. */
 app.post('/artists', artistControllers.create);
+
+app.get('/artists', artistControllers.list);

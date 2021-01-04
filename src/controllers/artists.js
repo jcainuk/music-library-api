@@ -20,5 +20,9 @@ In .then() , we give back a response to the user, with a status 201
   with a parameter containing the created record). */
 
 exports.create = (req, res) => {
-  Artist.create(req.body).then(artist => res.status(201).json(artist));
+  Artist.create(req.body).then((artist) => res.status(201).json(artist));
+};
+
+exports.list = (req, res) => {
+  Artist.findAll().then((artists) => res.status(200).json(artists));
 };
