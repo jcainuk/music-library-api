@@ -103,5 +103,21 @@ describe('/artists', () => {
           .catch((error) => done(error));
       });
     });
+    describe("PATCH /artists/:id", () => {
+      it("updates artist genre by id", (done) => {
+        const artist = artists[0];
+        request(app)
+          .patch(`/artists/${artist.id}`)
+          .send({ genre: "Psychedelic Rock" })
+          .then((res) => {
+            expect(res.status).to.equal(200);
+            Artist.findByPk(artist.id, { raw: true }).then((updatedArtist) => {
+              expect(updatedArtist.genre).to.equal("Psychedelic Rock");
+              done();
+            });
+          })
+          .catch((error) => done(error));
+      });
+    });
   });
 });
