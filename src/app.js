@@ -23,3 +23,5 @@ app.post('/artists', artistControllers.create);
 app.get('/artists', artistControllers.list);
 
 app.get('/artists/:id', artistControllers.getArtistById);
+
+app.patch('/artists/:id', artistControllers.updateArtist);
