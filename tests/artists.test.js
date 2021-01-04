@@ -79,5 +79,29 @@ describe('/artists', () => {
           .catch((error) => done(error));
       });
     });
+    describe("GET /artists/:artistId", () => {
+      it("gets artist record by ID", (done) => {
+        const artist = artists[0];
+        request(app)
+          .get(`/artists/${artist.id}`)
+          .then((res) => {
+            expect(res.status).to.equal(200);
+            expect(res.body.name).to.equal(artist.name);
+            expect(res.body.genre).to.equal(artist.genre);
+            done();
+          })
+          .catch((error) => done(error));
+      });
+      it("returns a 404 if the artist does not exist", (done) => {
+        request(app)
+          .get("/artists/12345")
+          .then((res) => {
+            expect(res.status).to.equal(404);
+            expect(res.body.error).to.equal("The artist could not be found.");
+            done();
+          })
+          .catch((error) => done(error));
+      });
+    });
   });
 });
