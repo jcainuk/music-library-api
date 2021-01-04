@@ -21,3 +21,5 @@ It is better this way, because concerns are separated in different files:
 app.post('/artists', artistControllers.create);
 
 app.get('/artists', artistControllers.list);
+
+app.get('/artists/:id', artistControllers.getArtistById);
