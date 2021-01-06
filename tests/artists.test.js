@@ -118,6 +118,20 @@ describe('/artists', () => {
           })
           .catch((error) => done(error));
       });
+      it("updates artist name by id", (done) => {
+        const artist = artists[0];
+        request(app)
+          .patch(`/artists/${artist.id}`)
+          .send({ name: "Kylie Minogue" })
+          .then((res) => {
+            expect(res.status).to.equal(200);
+            Artist.findByPk(artist.id, { raw: true }).then((updatedArtist) => {
+              expect(updatedArtist.name).to.equal("Kylie Minogue");
+              done();
+            });
+          })
+          .catch((error) => done(error));
+      });
     });
   });
 });
