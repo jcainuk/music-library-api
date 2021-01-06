@@ -132,6 +132,16 @@ describe('/artists', () => {
           })
           .catch((error) => done(error));
       });
+      it("returns a 404 if the artist does not exist", (done) => {
+        request(app)
+          .patch("/artists/12345")
+          .then((res) => {
+            expect(res.status).to.equal(404);
+            expect(res.body.error).to.equal("The artist could not be found.");
+            done();
+          })
+          .catch((error) => done(error));
+      });
     });
   });
 });
