@@ -38,7 +38,7 @@ app.post('/artists/:artistId/albums', albumControllers.create);
 
 app.get('/albums', albumControllers.list);
 
-// app.get('/albums/:id', albumControllers.getAlbumById);
+app.get('/albums/:id', albumControllers.getAlbumById);
 
 // app.patch('/albums/:id', albumControllers.updateAlbum);
 
