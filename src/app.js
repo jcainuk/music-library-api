@@ -19,6 +19,9 @@ app.get('/', (req, res) => {
 route directly in the app.js file, we specify a controller function.
 It is better this way, because concerns are separated in different files:
  one file for the routing, one file (or several files) for the controller. */
+
+// artists
+
 app.post('/artists', artistControllers.create);
 
 app.get('/artists', artistControllers.list);
@@ -29,4 +32,6 @@ app.patch('/artists/:id', artistControllers.updateArtist);
 
 app.delete('/artists/:id', artistControllers.deleteArtist);
 
-app.post('/albums', albumControllers.create);
+// albums
+
+app.post('/artists/:artistId/albums', albumControllers.create);
