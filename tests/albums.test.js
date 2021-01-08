@@ -71,9 +71,9 @@ describe('/albums', () => {
     let albums;
     beforeEach((done) => {
       Promise.all([
-        Album.create({ name: "Like a Virgin", year: "1984" }),
-        Album.create({ name: "True Blue", year: "1986" }),
-        Album.create({ name: "Erotica", year: "1992" }),
+        Album.create({ name: "Like a Virgin", year: 1984 }),
+        Album.create({ name: "True Blue", year: 1986 }),
+        Album.create({ name: "Erotica", year: 1992 }),
       ]).then((documents) => {
         albums = documents;
         done();

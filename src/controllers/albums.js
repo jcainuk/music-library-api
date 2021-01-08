@@ -18,3 +18,7 @@ exports.create = (req, res) => {
     }
   });
 };
+
+exports.list = (req, res) => {
+  Album.findAll().then((albums) => res.status(200).json(albums));
+};
