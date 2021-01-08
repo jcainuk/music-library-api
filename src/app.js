@@ -28,3 +28,5 @@ app.get('/artists/:id', artistControllers.getArtistById);
 app.patch('/artists/:id', artistControllers.updateArtist);
 
 app.delete('/artists/:id', artistControllers.deleteArtist);
+
+app.post('/albums', albumControllers.create);
