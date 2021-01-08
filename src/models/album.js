@@ -24,7 +24,7 @@ will know we are actually talking about the name stored in the database. */
 It is very abstract, but we need to do the same for every model we add. */
 
 /* It is also possible to just write it in one line:
-    return connection.define('Artist', schema);
+    return connection.define('Album', schema);
 */
   const AlbumModel = connection.define('Album', schema);
   return AlbumModel;
