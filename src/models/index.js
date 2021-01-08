@@ -6,6 +6,7 @@ const Sequelize = require('sequelize');
 
 /* Here we retrieve our Artist model definition that we will need later on. */
 const ArtistModel = require('./artist');
+const ArtistModel = require('./album');
 
 /* Below again, we retrieve our environment variables from the .env file.
 This works because in our package.json, we have this line:
@@ -33,7 +34,8 @@ const setupDatabase = () => {
   Basically it will create the table if it does not exist yet, or update the columns if needed. */
   connection.sync({ alter: true });
   return {
-    Artist
+    Artist,
+    Model
   };
 };
 
