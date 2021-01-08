@@ -67,28 +67,98 @@ describe('/albums', () => {
         });
     });
   });
-  describe("GET /albums/:albumId", () => {
-    it("gets album record by ID", (done) => {
-      const album = albums[0];
-      request(app)
-        .get(`/albums/${album.id}`)
-        .then((res) => {
-          expect(res.status).to.equal(200);
-          expect(res.body.name).to.equal(artist.name);
-          expect(res.body.genre).to.equal(artist.genre);
-          done();
-        })
-        .catch((error) => done(error));
+  describe("with albums in the database", () => {
+    let albums;
+    beforeEach((done) => {
+      Promise.all([
+        Album.create({ name: "Like a Virgin", year: "1984" }),
+        Artist.create({ name: "True Blue", year: "1986" }),
+        Artist.create({ name: "Erotica", year: "1992" }),
+      ]).then((documents) => {
+        albums = documents;
+        done();
+      });
     });
-    it("returns a 404 if the album does not exist", (done) => {
-      request(app)
-        .get("/albums/12345")
-        .then((res) => {
-          expect(res.status).to.equal(404);
-          expect(res.body.error).to.equal("The album could not be found.");
-          done();
-        })
-        .catch((error) => done(error));
+    describe("GET /albums", () => {
+      it("gets all album records", (done) => {
+        request(app)
+          .get("/albums")
+          .then((res) => {
+            expect(res.status).to.equal(200);
+            expect(res.body.length).to.equal(3);
+            res.body.forEach((album) => {
+              const expected = albums.find((a) => a.id === album.id);
+              expect(album.name).to.equal(expected.name);
+              expect(artist.year).to.equal(expected.year);
+            });
+            done();
+          })
+          .catch((error) => done(error));
+      });
     });
-  });
+    describe("GET /albums/:albumId", () => {
+      it("gets album record by ID", (done) => {
+        const album = albums[0];
+        request(app)
+          .get(`/albums/${album.id}`)
+          .then((res) => {
+            expect(res.status).to.equal(200);
+            expect(res.body.name).to.equal(album.name);
+            expect(res.body.year).to.equal(album.year);
+            done();
+          })
+          .catch((error) => done(error));
+      });
+      it("returns a 404 if the album does not exist", (done) => {
+        request(app)
+          .get("/albums/12345")
+          .then((res) => {
+            expect(res.status).to.equal(404);
+            expect(res.body.error).to.equal("The album could not be found.");
+            done();
+          })
+          .catch((error) => done(error));
+      });
+    });
+    describe("PATCH /albums/:id", () => {
+      it("updates album name by id", (done) => {
+        const album = albums[0];
+        request(app)
+          .patch(`/albums/${album.id}`)
+          .send({ name: "First Love" })
+          .then((res) => {
+            expect(res.status).to.equal(200);
+            Album.findByPk(album.id, { raw: true }).then((updatedAlbum) => {
+              expect(updatedAlbum.name).to.equal("First Love");
+              done();
+            });
+          })
+          .catch((error) => done(error));
+      });
+      it("updates album year by id", (done) => {
+        const album = albums[0];
+        request(app)
+          .patch(`/albums/${album.id}`)
+          .send({ year: "1998" })
+          .then((res) => {
+            expect(res.status).to.equal(200);
+            Album.findByPk(album.id, { raw: true }).then((updatedAlbum) => {
+              expect(updatedAlbum.year).to.equal("1998");
+              done();
+            });
+          })
+          .catch((error) => done(error));
+      });
+      it("returns a 404 if the artist does not exist", (done) => {
+        request(app)
+          .patch("/albums/12345")
+          .then((res) => {
+            expect(res.status).to.equal(404);
+            expect(res.body.error).to.equal("The album could not be found.");
+            done();
+          })
+          .catch((error) => done(error));
+      });
+    });
+});
 });
