@@ -1,0 +1,1 @@
+const { Album } = require('../models');
