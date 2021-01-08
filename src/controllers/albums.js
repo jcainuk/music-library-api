@@ -1,4 +1,4 @@
-const { Album, Artist } = require("../models");
+const { Album, Artist } = require('../models');
 
 exports.create = (req, res) => {
   const { artistId } = req.params;
