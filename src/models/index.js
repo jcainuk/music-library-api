@@ -27,6 +27,7 @@ const setupDatabase = () => {
 
   const Artist = ArtistModel(connection, Sequelize);
   const Album = AlbumModel(connection, Sequelize);
+  Album.belongsTo(Artist, { as: 'artist' });
 
   /* Below this checks what is the current state
   of the table in the database (which columns it has, what are
@@ -36,7 +37,7 @@ const setupDatabase = () => {
   connection.sync({ alter: true });
   return {
     Artist,
-    Model
+    Album,
   };
 };
 
