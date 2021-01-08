@@ -72,8 +72,8 @@ describe('/albums', () => {
     beforeEach((done) => {
       Promise.all([
         Album.create({ name: "Like a Virgin", year: "1984" }),
-        Artist.create({ name: "True Blue", year: "1986" }),
-        Artist.create({ name: "Erotica", year: "1992" }),
+        Album.create({ name: "True Blue", year: "1986" }),
+        Album.create({ name: "Erotica", year: "1992" }),
       ]).then((documents) => {
         albums = documents;
         done();
@@ -89,7 +89,7 @@ describe('/albums', () => {
             res.body.forEach((album) => {
               const expected = albums.find((a) => a.id === album.id);
               expect(album.name).to.equal(expected.name);
-              expect(artist.year).to.equal(expected.year);
+              expect(album.year).to.equal(expected.year);
             });
             done();
           })
@@ -149,7 +149,7 @@ describe('/albums', () => {
           })
           .catch((error) => done(error));
       });
-      it("returns a 404 if the artist does not exist", (done) => {
+      it("returns a 404 if the album does not exist", (done) => {
         request(app)
           .patch("/albums/12345")
           .then((res) => {
@@ -160,5 +160,30 @@ describe('/albums', () => {
           .catch((error) => done(error));
       });
     });
-});
+    describe("DELETE /albums/:albumId", () => {
+      it("deletes album record by id", (done) => {
+        const album = albums[0];
+        request(app)
+          .delete(`/albums/${album.id}`)
+          .then((res) => {
+            expect(res.status).to.equal(204);
+            Artist.findByPk(album.id, { raw: true }).then((updatedAlbum) => {
+              expect(updatedAlbum).to.equal(null);
+              done();
+            });
+          })
+          .catch((error) => done(error));
+      });
+      it("returns a 404 if the album does not exist", (done) => {
+        request(app)
+          .delete("/albums/12345")
+          .then((res) => {
+            expect(res.status).to.equal(404);
+            expect(res.body.error).to.equal("The album could not be found.");
+            done();
+          })
+          .catch((error) => done(error));
+      });
+    });
+  });
 });
