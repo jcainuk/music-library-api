@@ -1,5 +1,5 @@
 /* src/controllers/artists.js */
-const { Artist } = require('../models');
+const { Album, Artist } = require('../models');
 
 /* Here we define the controller method like we used to do in the app.js file.
  chaining  function calls.
