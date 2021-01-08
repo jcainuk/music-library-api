@@ -42,4 +42,4 @@ app.get('/albums/:id', albumControllers.getAlbumById);
 
 app.patch('/albums/:id', albumControllers.updateAlbum);
 
-// app.delete('/albums/:id', albumControllers.deleteAlbum);
+app.delete('/albums/:id', albumControllers.deleteAlbum);
