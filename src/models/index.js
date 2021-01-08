@@ -27,6 +27,8 @@ const setupDatabase = () => {
 
   const Artist = ArtistModel(connection, Sequelize);
   const Album = AlbumModel(connection, Sequelize);
+  /* belongsTo creates a getter and setter for the album instances
+   and deals with the database setup for the foreign key inside the albums table */
   Album.belongsTo(Artist, { as: 'artist' });
 
   /* Below this checks what is the current state
