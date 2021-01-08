@@ -139,11 +139,11 @@ describe('/albums', () => {
         const album = albums[0];
         request(app)
           .patch(`/albums/${album.id}`)
-          .send({ year: "1998" })
+          .send({ year: 1998 })
           .then((res) => {
             expect(res.status).to.equal(200);
             Album.findByPk(album.id, { raw: true }).then((updatedAlbum) => {
-              expect(updatedAlbum.year).to.equal("1998");
+              expect(updatedAlbum.year).to.equal(1998);
               done();
             });
           })

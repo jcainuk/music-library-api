@@ -33,3 +33,14 @@ exports.getAlbumById = (req, res) => {
     }
   });
 };
+
+exports.updateAlbum = (req, res) => {
+  const { id } = req.params;
+  Album.update(req.body, { where: { id } }).then(([rowsUpdated]) => {
+    if (!rowsUpdated) {
+      res.status(404).json({ error: 'The album could not be found.' });
+    } else {
+      res.status(200).json(rowsUpdated);
+    }
+  });
+};

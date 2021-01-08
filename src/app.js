@@ -40,6 +40,6 @@ app.get('/albums', albumControllers.list);
 
 app.get('/albums/:id', albumControllers.getAlbumById);
 
-// app.patch('/albums/:id', albumControllers.updateAlbum);
+app.patch('/albums/:id', albumControllers.updateAlbum);
 
 // app.delete('/albums/:id', albumControllers.deleteAlbum);
