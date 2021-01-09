@@ -43,3 +43,15 @@ app.get('/albums/:id', albumControllers.getAlbumById);
 app.patch('/albums/:id', albumControllers.updateAlbum);
 
 app.delete('/albums/:id', albumControllers.deleteAlbum);
+
+// songs
+
+app.post('/albums/:albumId/songs', songControllers.create);
+
+// app.get('/songs', songControllers.list);
+
+// app.get('/songs/:id', songControllers.getSongById);
+
+// app.patch('/songs/:id', songControllers.updateSong);
+
+// app.delete('/songs/:id', songControllers.deleteSong);
