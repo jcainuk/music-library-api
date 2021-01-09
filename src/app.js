@@ -1,6 +1,7 @@
 const express = require('express');
 const artistControllers = require('./controllers/artists');
 const albumControllers = require('./controllers/albums');
+const songControllers = require('./controllers/songs');
 
 const app = express();
 
