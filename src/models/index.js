@@ -32,6 +32,7 @@ const setupDatabase = () => {
   /* belongsTo creates a getter and setter for the album instances
    and deals with the database setup for the foreign key inside the albums table */
   Album.belongsTo(Artist, { as: 'artist' });
+  Song.belongsTo(Artist, { as: 'artist' });
   Song.belongsTo(Album, { as: 'album' });
 
   /* Below this checks what is the current state
