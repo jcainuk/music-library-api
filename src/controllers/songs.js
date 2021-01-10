@@ -19,14 +19,6 @@ exports.create = (req, res) => {
               });
             });
           });
-
-          // Song.create({
-          //   name: req.body.name,
-          //   artistId: artist.id,
-          //   albumId: album.id,
-          // }).then((song) => {
-          //   res.status(201).json(song);
-          // });
         }
       });
     }
