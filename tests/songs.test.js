@@ -49,7 +49,7 @@ describe('/songs', () => {
           const songId = res.body.id;
           expect(res.body.id).to.equal(songId);
           expect(res.body.name).to.equal('Ironic');
-          // expect(res.body.artistId).to.equal(artist.id);
+          expect(res.body.artistId).to.equal(artist.id);
           expect(res.body.albumId).to.equal(album.id);
           console.log(album.id, res.body);
           done();
