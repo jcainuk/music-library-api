@@ -15,12 +15,10 @@ exports.create = (req, res) => {
           Song.create({
             name: req.body.name,
           }).then((song) => {
-            song.setArtist(artist).then((song) => {
-              res.status(201).json(song);
-            });
-            song.setAlbum(album).then((song) => {
-              res.status(201).json(song);
-            });
+            song.setArtist(artist).setAlbum(album)
+              .then((song) => {
+                res.status(201).json(song);
+              });
           });
         }
       });

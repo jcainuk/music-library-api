@@ -53,7 +53,8 @@ describe('/songs', () => {
           expect(res.body.albumId).to.equal(album.id);
           console.log(album.id, res.body);
           done();
-        });
+        })
+        .catch((error) => done(error));
     });
     it('returns a 404 and does not create a song if the album does not exist', (done) => {
       request(app)
@@ -70,7 +71,8 @@ describe('/songs', () => {
             expect(songs.length).to.equal(0);
             done();
           });
-        });
+        })
+        .catch((error) => done(error));
     });
   });
   describe("with songs in the database", () => {
