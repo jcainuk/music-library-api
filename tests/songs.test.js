@@ -41,7 +41,7 @@ describe('/songs', () => {
       request(app)
         .post(`/albums/${album.id}/songs`)
         .send({
-          artist: artist.id,
+          artistId: artist.id,
           name: 'Ironic',
         })
         .then((res) => {
@@ -51,7 +51,6 @@ describe('/songs', () => {
           expect(res.body.name).to.equal('Ironic');
           expect(res.body.artistId).to.equal(artist.id);
           expect(res.body.albumId).to.equal(album.id);
-          console.log(album.id, res.body);
           done();
         })
         .catch((error) => done(error));
@@ -60,12 +59,30 @@ describe('/songs', () => {
       request(app)
         .post('/albums/1234/songs')
         .send({
-          album: album.id,
+          artistId: artist.id,
           name: 'Ironic',
         })
         .then((res) => {
           expect(res.status).to.equal(404);
           expect(res.body.error).to.equal('The album could not be found.');
+
+          Song.findAll().then((songs) => {
+            expect(songs.length).to.equal(0);
+            done();
+          });
+        })
+        .catch((error) => done(error));
+    });
+    it('returns a 404 and does not create a song if the artist does not exist', (done) => {
+      request(app)
+        .post(`/albums/${album.id}/songs`)
+        .send({
+          artistId: 12345,
+          name: 'Ironic',
+        })
+        .then((res) => {
+          expect(res.status).to.equal(404);
+          expect(res.body.error).to.equal('The artist could not be found.');
 
           Song.findAll().then((songs) => {
             expect(songs.length).to.equal(0);
@@ -88,7 +105,7 @@ describe('/songs', () => {
       });
     });
     describe("GET /songs", () => {
-      it("gets all song records", (done) => {
+      xit("gets all song records", (done) => {
         request(app)
           .get("/songs")
           .then((res) => {
@@ -104,7 +121,7 @@ describe('/songs', () => {
       });
     });
     describe("GET /songs/:songId", () => {
-      it("gets song record by ID", (done) => {
+      xit("gets song record by ID", (done) => {
         const song = songs[0];
         request(app)
           .get(`/songs/${song.id}`)
@@ -115,7 +132,7 @@ describe('/songs', () => {
           })
           .catch((error) => done(error));
       });
-      it("returns a 404 if the song does not exist", (done) => {
+      xit("returns a 404 if the song does not exist", (done) => {
         request(app)
           .get("/songs/12345")
           .then((res) => {
@@ -127,7 +144,7 @@ describe('/songs', () => {
       });
     });
     describe("PATCH /songs/:id", () => {
-      it("updates song name by id", (done) => {
+      xit("updates song name by id", (done) => {
         const song = songs[0];
         request(app)
           .patch(`/songs/${song.id}`)
@@ -142,7 +159,7 @@ describe('/songs', () => {
           .catch((error) => done(error));
       });
 
-      it("returns a 404 if the song does not exist", (done) => {
+      xit("returns a 404 if the song does not exist", (done) => {
         request(app)
           .patch("/songs/12345")
           .then((res) => {
@@ -154,7 +171,7 @@ describe('/songs', () => {
       });
     });
     describe("DELETE /songs/:songId", () => {
-      it("deletes song record by id", (done) => {
+      xit("deletes song record by id", (done) => {
         const song = songs[0];
         request(app)
           .delete(`/songs/${song.id}`)
@@ -167,7 +184,7 @@ describe('/songs', () => {
           })
           .catch((error) => done(error));
       });
-      it("returns a 404 if the song does not exist", (done) => {
+      xit("returns a 404 if the song does not exist", (done) => {
         request(app)
           .delete("/songs/12345")
           .then((res) => {
