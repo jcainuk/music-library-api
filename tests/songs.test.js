@@ -121,7 +121,7 @@ describe('/songs', () => {
       });
     });
     describe("GET /songs/:songId", () => {
-      xit("gets song record by ID", (done) => {
+      it("gets song record by ID", (done) => {
         const song = songs[0];
         request(app)
           .get(`/songs/${song.id}`)
@@ -132,7 +132,7 @@ describe('/songs', () => {
           })
           .catch((error) => done(error));
       });
-      xit("returns a 404 if the song does not exist", (done) => {
+      it("returns a 404 if the song does not exist", (done) => {
         request(app)
           .get("/songs/12345")
           .then((res) => {
@@ -144,7 +144,7 @@ describe('/songs', () => {
       });
     });
     describe("PATCH /songs/:id", () => {
-      xit("updates song name by id", (done) => {
+      it("updates song name by id", (done) => {
         const song = songs[0];
         request(app)
           .patch(`/songs/${song.id}`)
@@ -159,7 +159,7 @@ describe('/songs', () => {
           .catch((error) => done(error));
       });
 
-      xit("returns a 404 if the song does not exist", (done) => {
+      it("returns a 404 if the song does not exist", (done) => {
         request(app)
           .patch("/songs/12345")
           .then((res) => {
@@ -171,7 +171,7 @@ describe('/songs', () => {
       });
     });
     describe("DELETE /songs/:songId", () => {
-      xit("deletes song record by id", (done) => {
+      it("deletes song record by id", (done) => {
         const song = songs[0];
         request(app)
           .delete(`/songs/${song.id}`)
@@ -184,7 +184,7 @@ describe('/songs', () => {
           })
           .catch((error) => done(error));
       });
-      xit("returns a 404 if the song does not exist", (done) => {
+      it("returns a 404 if the song does not exist", (done) => {
         request(app)
           .delete("/songs/12345")
           .then((res) => {

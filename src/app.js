@@ -51,8 +51,8 @@ app.post('/albums/:albumId/songs', songControllers.create);
 
 app.get('/songs', songControllers.list);
 
-// app.get('/songs/:id', songControllers.getSongById);
+app.get('/songs/:id', songControllers.getSongById);
 
-// app.patch('/songs/:id', songControllers.updateSong);
+app.patch('/songs/:id', songControllers.updateSong);
 
-// app.delete('/songs/:id', songControllers.deleteSong);
+app.delete('/songs/:id', songControllers.deleteSong);
