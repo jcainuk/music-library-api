@@ -56,7 +56,7 @@ This is a project completed as part of the Software Engineering FastTrack course
 
 ## Status
 
-Project is: _IN_PROGRESS_
+Project is: _COMPLETE_
 
 ## Inspiration
 
