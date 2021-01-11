@@ -44,7 +44,18 @@ exports.list = (req, res) => {
 
 exports.getSongById = (req, res) => {
   const { id } = req.params;
-  Song.findByPk(id).then((song) => {
+  Song.findByPk(id, {
+    include: [
+      {
+        model: Artist,
+        as: "artist",
+      },
+      {
+        model: Album,
+        as: "album",
+      },
+    ],
+  }).then((song) => {
     if (!song) {
       res.status(404).json({ error: 'The song could not be found.' });
     } else {
