@@ -26,5 +26,18 @@ exports.create = (req, res) => {
 };
 
 exports.list = (req, res) => {
-  Song.findAll().then((songs) => res.status(200).json(songs));
+  Song.findAll({
+    include: [
+      {
+        model: Artist,
+        as: "artist",
+      },
+      {
+        model: Album,
+        as: "album",
+      },
+    ],
+  }).then((songs) => {
+    res.status(200).json(songs);
+  });
 };
