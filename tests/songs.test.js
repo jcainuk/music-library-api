@@ -105,7 +105,7 @@ describe('/songs', () => {
       });
     });
     describe("GET /songs", () => {
-      xit("gets all song records", (done) => {
+      it("gets all song records", (done) => {
         request(app)
           .get("/songs")
           .then((res) => {

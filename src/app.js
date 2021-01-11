@@ -49,7 +49,7 @@ app.delete('/albums/:id', albumControllers.deleteAlbum);
 
 app.post('/albums/:albumId/songs', songControllers.create);
 
-// app.get('/songs', songControllers.list);
+app.get('/songs', songControllers.list);
 
 // app.get('/songs/:id', songControllers.getSongById);
 

@@ -24,3 +24,7 @@ exports.create = (req, res) => {
     }
   });
 };
+
+exports.list = (req, res) => {
+  Song.findAll().then((songs) => res.status(200).json(songs));
+};
