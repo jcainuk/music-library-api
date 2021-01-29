@@ -92,22 +92,22 @@ describe('/songs', () => {
         .catch((error) => done(error));
     });
   });
-  describe("with songs in the database", () => {
+  describe('with songs in the database', () => {
     let songs;
     beforeEach((done) => {
       Promise.all([
-        Song.create({ name: "Not The Doctor" }),
-        Song.create({ name: "Head Over Feet" }),
-        Song.create({ name: "Forgiven" }),
+        Song.create({ name: 'Not The Doctor' }),
+        Song.create({ name: 'Head Over Feet' }),
+        Song.create({ name: 'Forgiven' }),
       ]).then((documents) => {
         songs = documents;
         done();
       });
     });
-    describe("GET /songs", () => {
-      it("gets all song records", (done) => {
+    describe('GET /songs', () => {
+      it('gets all song records', (done) => {
         request(app)
-          .get("/songs")
+          .get('/songs')
           .then((res) => {
             expect(res.status).to.equal(200);
             expect(res.body.length).to.equal(3);
@@ -120,8 +120,8 @@ describe('/songs', () => {
           .catch((error) => done(error));
       });
     });
-    describe("GET /songs/:songId", () => {
-      it("gets song record by ID", (done) => {
+    describe('GET /songs/:songId', () => {
+      it('gets song record by ID', (done) => {
         const song = songs[0];
         request(app)
           .get(`/songs/${song.id}`)
@@ -132,46 +132,46 @@ describe('/songs', () => {
           })
           .catch((error) => done(error));
       });
-      it("returns a 404 if the song does not exist", (done) => {
+      it('returns a 404 if the song does not exist', (done) => {
         request(app)
-          .get("/songs/12345")
+          .get('/songs/12345')
           .then((res) => {
             expect(res.status).to.equal(404);
-            expect(res.body.error).to.equal("The song could not be found.");
+            expect(res.body.error).to.equal('The song could not be found.');
             done();
           })
           .catch((error) => done(error));
       });
     });
-    describe("PATCH /songs/:id", () => {
-      it("updates song name by id", (done) => {
+    describe('PATCH /songs/:id', () => {
+      it('updates song name by id', (done) => {
         const song = songs[0];
         request(app)
           .patch(`/songs/${song.id}`)
-          .send({ name: "Right Through You" })
+          .send({ name: 'Right Through You' })
           .then((res) => {
             expect(res.status).to.equal(200);
             Song.findByPk(song.id, { raw: true }).then((updatedSong) => {
-              expect(updatedSong.name).to.equal("Right Through You");
+              expect(updatedSong.name).to.equal('Right Through You');
               done();
             });
           })
           .catch((error) => done(error));
       });
 
-      it("returns a 404 if the song does not exist", (done) => {
+      it('returns a 404 if the song does not exist', (done) => {
         request(app)
-          .patch("/songs/12345")
+          .patch('/songs/12345')
           .then((res) => {
             expect(res.status).to.equal(404);
-            expect(res.body.error).to.equal("The song could not be found.");
+            expect(res.body.error).to.equal('The song could not be found.');
             done();
           })
           .catch((error) => done(error));
       });
     });
-    describe("DELETE /songs/:songId", () => {
-      it("deletes song record by id", (done) => {
+    describe('DELETE /songs/:songId', () => {
+      it('deletes song record by id', (done) => {
         const song = songs[0];
         request(app)
           .delete(`/songs/${song.id}`)
@@ -184,12 +184,12 @@ describe('/songs', () => {
           })
           .catch((error) => done(error));
       });
-      it("returns a 404 if the song does not exist", (done) => {
+      it('returns a 404 if the song does not exist', (done) => {
         request(app)
-          .delete("/songs/12345")
+          .delete('/songs/12345')
           .then((res) => {
             expect(res.status).to.equal(404);
-            expect(res.body.error).to.equal("The song could not be found.");
+            expect(res.body.error).to.equal('The song could not be found.');
             done();
           })
           .catch((error) => done(error));

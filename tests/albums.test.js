@@ -69,22 +69,22 @@ describe('/albums', () => {
         .catch((error) => done(error));
     });
   });
-  describe("with albums in the database", () => {
+  describe('with albums in the database', () => {
     let albums;
     beforeEach((done) => {
       Promise.all([
-        Album.create({ name: "Like a Virgin", year: 1984 }),
-        Album.create({ name: "True Blue", year: 1986 }),
-        Album.create({ name: "Erotica", year: 1992 }),
+        Album.create({ name: 'Like a Virgin', year: 1984 }),
+        Album.create({ name: 'True Blue', year: 1986 }),
+        Album.create({ name: 'Erotica', year: 1992 }),
       ]).then((documents) => {
         albums = documents;
         done();
       });
     });
-    describe("GET /albums", () => {
-      it("gets all album records", (done) => {
+    describe('GET /albums', () => {
+      it('gets all album records', (done) => {
         request(app)
-          .get("/albums")
+          .get('/albums')
           .then((res) => {
             expect(res.status).to.equal(200);
             expect(res.body.length).to.equal(3);
@@ -98,8 +98,8 @@ describe('/albums', () => {
           .catch((error) => done(error));
       });
     });
-    describe("GET /albums/:albumId", () => {
-      it("gets album record by ID", (done) => {
+    describe('GET /albums/:albumId', () => {
+      it('gets album record by ID', (done) => {
         const album = albums[0];
         request(app)
           .get(`/albums/${album.id}`)
@@ -111,33 +111,33 @@ describe('/albums', () => {
           })
           .catch((error) => done(error));
       });
-      it("returns a 404 if the album does not exist", (done) => {
+      it('returns a 404 if the album does not exist', (done) => {
         request(app)
-          .get("/albums/12345")
+          .get('/albums/12345')
           .then((res) => {
             expect(res.status).to.equal(404);
-            expect(res.body.error).to.equal("The album could not be found.");
+            expect(res.body.error).to.equal('The album could not be found.');
             done();
           })
           .catch((error) => done(error));
       });
     });
-    describe("PATCH /albums/:id", () => {
-      it("updates album name by id", (done) => {
+    describe('PATCH /albums/:id', () => {
+      it('updates album name by id', (done) => {
         const album = albums[0];
         request(app)
           .patch(`/albums/${album.id}`)
-          .send({ name: "First Love" })
+          .send({ name: 'First Love' })
           .then((res) => {
             expect(res.status).to.equal(200);
             Album.findByPk(album.id, { raw: true }).then((updatedAlbum) => {
-              expect(updatedAlbum.name).to.equal("First Love");
+              expect(updatedAlbum.name).to.equal('First Love');
               done();
             });
           })
           .catch((error) => done(error));
       });
-      it("updates album year by id", (done) => {
+      it('updates album year by id', (done) => {
         const album = albums[0];
         request(app)
           .patch(`/albums/${album.id}`)
@@ -151,19 +151,19 @@ describe('/albums', () => {
           })
           .catch((error) => done(error));
       });
-      it("returns a 404 if the album does not exist", (done) => {
+      it('returns a 404 if the album does not exist', (done) => {
         request(app)
-          .patch("/albums/12345")
+          .patch('/albums/12345')
           .then((res) => {
             expect(res.status).to.equal(404);
-            expect(res.body.error).to.equal("The album could not be found.");
+            expect(res.body.error).to.equal('The album could not be found.');
             done();
           })
           .catch((error) => done(error));
       });
     });
-    describe("DELETE /albums/:albumId", () => {
-      it("deletes album record by id", (done) => {
+    describe('DELETE /albums/:albumId', () => {
+      it('deletes album record by id', (done) => {
         const album = albums[0];
         request(app)
           .delete(`/albums/${album.id}`)
@@ -176,12 +176,12 @@ describe('/albums', () => {
           })
           .catch((error) => done(error));
       });
-      it("returns a 404 if the album does not exist", (done) => {
+      it('returns a 404 if the album does not exist', (done) => {
         request(app)
-          .delete("/albums/12345")
+          .delete('/albums/12345')
           .then((res) => {
             expect(res.status).to.equal(404);
-            expect(res.body.error).to.equal("The album could not be found.");
+            expect(res.body.error).to.equal('The album could not be found.');
             done();
           })
           .catch((error) => done(error));

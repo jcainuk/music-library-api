@@ -50,22 +50,22 @@ describe('/artists', () => {
       expect(insertedArtistRecords.genre).to.equal('Rock');
     });
   });
-  describe("with artists in the database", () => {
+  describe('with artists in the database', () => {
     let artists;
     beforeEach((done) => {
       Promise.all([
-        Artist.create({ name: "Tame Impala", genre: "Rock" }),
-        Artist.create({ name: "Kylie Minogue", genre: "Pop" }),
-        Artist.create({ name: "Dave Brubeck", genre: "Jazz" }),
+        Artist.create({ name: 'Tame Impala', genre: 'Rock' }),
+        Artist.create({ name: 'Kylie Minogue', genre: 'Pop' }),
+        Artist.create({ name: 'Dave Brubeck', genre: 'Jazz' }),
       ]).then((documents) => {
         artists = documents;
         done();
       });
     });
-    describe("GET /artists", () => {
-      it("gets all artist records", (done) => {
+    describe('GET /artists', () => {
+      it('gets all artist records', (done) => {
         request(app)
-          .get("/artists")
+          .get('/artists')
           .then((res) => {
             expect(res.status).to.equal(200);
             expect(res.body.length).to.equal(3);
@@ -79,8 +79,8 @@ describe('/artists', () => {
           .catch((error) => done(error));
       });
     });
-    describe("GET /artists/:artistId", () => {
-      it("gets artist record by ID", (done) => {
+    describe('GET /artists/:artistId', () => {
+      it('gets artist record by ID', (done) => {
         const artist = artists[0];
         request(app)
           .get(`/artists/${artist.id}`)
@@ -92,59 +92,59 @@ describe('/artists', () => {
           })
           .catch((error) => done(error));
       });
-      it("returns a 404 if the artist does not exist", (done) => {
+      it('returns a 404 if the artist does not exist', (done) => {
         request(app)
-          .get("/artists/12345")
+          .get('/artists/12345')
           .then((res) => {
             expect(res.status).to.equal(404);
-            expect(res.body.error).to.equal("The artist could not be found.");
+            expect(res.body.error).to.equal('The artist could not be found.');
             done();
           })
           .catch((error) => done(error));
       });
     });
-    describe("PATCH /artists/:id", () => {
-      it("updates artist genre by id", (done) => {
+    describe('PATCH /artists/:id', () => {
+      it('updates artist genre by id', (done) => {
         const artist = artists[0];
         request(app)
           .patch(`/artists/${artist.id}`)
-          .send({ genre: "Psychedelic Rock" })
+          .send({ genre: 'Psychedelic Rock' })
           .then((res) => {
             expect(res.status).to.equal(200);
             Artist.findByPk(artist.id, { raw: true }).then((updatedArtist) => {
-              expect(updatedArtist.genre).to.equal("Psychedelic Rock");
+              expect(updatedArtist.genre).to.equal('Psychedelic Rock');
               done();
             });
           })
           .catch((error) => done(error));
       });
-      it("updates artist name by id", (done) => {
+      it('updates artist name by id', (done) => {
         const artist = artists[0];
         request(app)
           .patch(`/artists/${artist.id}`)
-          .send({ name: "Kylie Minogue" })
+          .send({ name: 'Kylie Minogue' })
           .then((res) => {
             expect(res.status).to.equal(200);
             Artist.findByPk(artist.id, { raw: true }).then((updatedArtist) => {
-              expect(updatedArtist.name).to.equal("Kylie Minogue");
+              expect(updatedArtist.name).to.equal('Kylie Minogue');
               done();
             });
           })
           .catch((error) => done(error));
       });
-      it("returns a 404 if the artist does not exist", (done) => {
+      it('returns a 404 if the artist does not exist', (done) => {
         request(app)
-          .patch("/artists/12345")
+          .patch('/artists/12345')
           .then((res) => {
             expect(res.status).to.equal(404);
-            expect(res.body.error).to.equal("The artist could not be found.");
+            expect(res.body.error).to.equal('The artist could not be found.');
             done();
           })
           .catch((error) => done(error));
       });
     });
-    describe("DELETE /artists/:artistId", () => {
-      it("deletes artist record by id", (done) => {
+    describe('DELETE /artists/:artistId', () => {
+      it('deletes artist record by id', (done) => {
         const artist = artists[0];
         request(app)
           .delete(`/artists/${artist.id}`)
@@ -157,12 +157,12 @@ describe('/artists', () => {
           })
           .catch((error) => done(error));
       });
-      it("returns a 404 if the artist does not exist", (done) => {
+      it('returns a 404 if the artist does not exist', (done) => {
         request(app)
-          .delete("/artists/12345")
+          .delete('/artists/12345')
           .then((res) => {
             expect(res.status).to.equal(404);
-            expect(res.body.error).to.equal("The artist could not be found.");
+            expect(res.body.error).to.equal('The artist could not be found.');
             done();
           })
           .catch((error) => done(error));
